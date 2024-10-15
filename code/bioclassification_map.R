@@ -110,7 +110,6 @@ cluster_map <- function(x,basemap=basemap,buf=50){
 
 #regional Region ----------
 
-
 mar_map <- cluster_map("MAR",basemap)
 sgsl_map <- cluster_map("SGSL",basemap)
 ngsl_map <- cluster_map("NGSL",basemap)
