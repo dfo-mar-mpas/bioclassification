@@ -104,6 +104,6 @@ match_table <- clusters%>%
                data.frame()%>%
                dplyr::select(region,bioregion,cl,classification)
 
-write.csv(match_table,file="utput/open data files/name_table.csv",row.names=FALSE)
+write.csv(match_table,file="output/open data files/name_table.csv",row.names=FALSE)
 
           
