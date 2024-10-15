@@ -14,3 +14,8 @@ Marine classification schemes based on abiotic surrogates often inform regionalm
 ![ ](/output/allmap_trimmed.jpg)
 
 __Figure 1__ Bioregional classification of benthic marine fish and invertebrate communities based on regional reseach vessel (RV) surveys. 
+
+
+** NB **
+
+Code available in this repository processes outputs from the analysis associated with O'Brien et al. (2023). Code for that analysis can be found at <https://github.com/obrienjm25/NW-Atl-bioclassification>
