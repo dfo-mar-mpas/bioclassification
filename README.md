@@ -9,6 +9,6 @@ J.M. O'Brien | R.R.E. Stanley | N.W. Jeffery | S.G. Heaslip | C. DiBacco | Z. Wa
 
 
 
-![ ](/output/allmap.jpg)
+![ ](/output/allmap_trimmed.jpg)
 
 __Figure 1__ Bioregional classification of benthic marine fish and invertebrate communities based on regional reseach vessel (RV) surveys. 

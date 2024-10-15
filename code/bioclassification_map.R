@@ -8,6 +8,7 @@ library(viridis)
 library(patchwork)
 library(ggspatial)
 library(ggnewscale)
+library(magick)
 
 #set working directory
 CanProj <- "+proj=lcc +lat_1=49 +lat_2=77 +lat_0=63.390675 +lon_0=-91.86666666666666 +x_0=6200000 +y_0=3000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
@@ -174,3 +175,8 @@ all_map <- ggplot()+
   theme_bw()
 
 ggsave("output/allmap.jpg",all_map,height=8*1.5,width=6*1.5,units="in",dpi=300)
+
+#trim the whitespace
+image <- image_read("output/allmap.jpg")
+
+image_write(image_trim(image), path = "output/allmap_trimmed.jpg")
