@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<metadata>
+ <idinfo>
+  <citation>
+   <citeinfo>
+    <origin>Fisheries and Oceans Canada</origin>
+    <pubdate>Unpublished material</pubdate>
+    <title>Predicted distribution of groundfish community types in Newfoundland region from DFO source data, UTM 21 (2007-2013) [NL_PredClust_map]</title>
+    <edition/>
+    <geoform>raster digital data</geoform>
+    <pubinfo>
+     <pubplace/>
+     <publish/>
+    </pubinfo>
+    <othercit/>
+    <onlink/>
+   </citeinfo>
+  </citation>
+  <descript>
+   <abstract>This raster layer shows the predicted distribution of 5 unique ecological groupings of groundfish (and a handful of commercially harvested macroinvertebrates) off the coast of Newfoundland and Labrador. The groupings were delineated by hierachical clustering of presence/absence data from DFO annual multispecies trawl surveys from 2007-2013 conducted in spring Mar-Jul (mainly May/Jun) and fall Sep-Dec (mainly Oct-Dec). Their distribution is predicted from a random forest classification model indicating the probabilities that each grouping occurs at a given location based on the value of 22 abiotic predictor variables at that location. Predictions are provided at a resolution of 4 km and bounded by the limits of the RV survey strata with a 5 km land buffer also applied. </abstract>
+   <purpose>This layer was developed in support of Marine Protected Area network planning; chiefly to facilitate incorporating representative community types in the network plan.</purpose>
+   <supplinf>Abiotic predictors used in random forest classification in order of variable importance:
+
+Depth 
+Average minimum annual bottom temperature
+Averange annual range in bottom salinity  
+Average maximum annual bottom temperature
+Average mean winter surface chl concentration
+Dissolved oxygen
+Average mean summer surface chl concentration
+Slope
+pH
+Bathymetric Position Index (20 km radius)
+Average mean annual current velocity (E-W)
+Average mean annual mixed layer depth
+Average mean annual bottom stress
+Average minimum annual surface chl concentration
+Average maximum spring/summer PP
+Average mean spring surface chl concentration
+Average mean fall surface chl concentration
+Average maximum annual current velocity (E-W)
+Average maximum annual current velocity (N-S)
+Bathymetric Position Index (0.5 km radius)
+Average mean annual PP
+Aspect</supplinf>
+  </descript>
+  <timeperd>
+   <timeinfo>
+    <sngdate>
+     <caldate></caldate>
+    </sngdate>
+	<rngdates>	
+	 <begdate> 200705</begdate>
+	 <enddate> 201312</enddate>
+	</rngdates>
+   </timeinfo>
+   <current>ground condition</current>
+  </timeperd>
+  <status>
+   <progress>Complete</progress>
+   <update/>
+  </status>
+  <spdom>
+   <bounding>
+    <westbc>-60.98789</westbc>
+    <eastbc>-43.5452</eastbc>
+    <northbc>57.72872</northbc>
+    <southbc>42.40826</southbc>
+   </bounding>
+  </spdom>
+  <keywords>
+   <theme>
+    <themekt/>
+    <themekey/>
+   </theme>
+   <place>
+    <placekt/>
+    <placekey>Newfoundland and Labrador</placekey>
+   </place>
+   <temporal>
+    <tempkt/>
+    <tempkey/>
+   </temporal>
+  </keywords>
+  <accconst/>
+  <useconst>acknowledgement of the Originator when using the data set as a source</useconst>
+  <ptcontac>
+   <cntinfo>
+    <cntorgp>
+     <cntorg>Fisheries and Oceans Canada, Maritimes Region, Coastal and Ecosystem Science Division, Habitat Ecology Section, Marine Conservation Targets Team</cntorg>
+     <cntper>John O'Brien (Biologist) or Ryan Stanley (Research Scientist)</cntper>
+    </cntorgp>
+    <cntaddr>
+     <addrtype>physical</addrtype>
+     <address>1 Challenger Drive</address>
+     <city>Dartmouth</city>
+     <state>NS</state>
+     <postal>B2Y 4A2</postal>
+     <country>Canada</country>
+    </cntaddr>
+    <cntvoice/>
+    <cntemail>John.O'brien@dfo-mpo.gc.ca; Ryan.Stanley@dfo-mpo.gc.ca</cntemail>
+   </cntinfo>
+  </ptcontac>
+  <native>Produced in R v. 3.5.1 on Windows 10</native>
+ </idinfo>
+ <dataqual>
+  <logic/>
+  <complete/>
+  <lineage>
+   <srcinfo>
+    <srccite>
+     <citeinfo>
+      <origin/>
+      <pubdate/>
+      <title/>
+      <edition/>
+     </citeinfo>
+    </srccite>
+    <srcscale/>
+    <typesrc/>
+    <srctime>
+     <timeinfo>
+      <sngdate>
+       <caldate/>
+      </sngdate>
+     </timeinfo>
+     <srccurr/>
+    </srctime>
+    <srccitea/>
+    <srccontr/>
+   </srcinfo>
+   <procstep>
+    <procdesc/>
+    <procdate/>
+    <proccont>
+     <cntinfo>
+      <cntperp>
+       <cntper/>
+      </cntperp>
+      <cntaddr>
+       <addrtype/>
+       <address/>
+       <city/>
+       <state/>
+       <postal/>
+       <country/>
+      </cntaddr>
+      <cntvoice/>
+     </cntinfo>
+    </proccont>
+   </procstep>
+  </lineage>
+ </dataqual>
+ <spref>
+  <horizsys>
+   <geograph>
+    <latres/>
+    <longres/>
+    <geogunit/>
+   </geograph>
+   <planar>
+	 <gridsys>
+		<utm>
+		<utmzone> 21 </utmzone>
+		</utm>
+	 </gridsys>
+	 <planci>
+	  <plandu> meters </plandu>
+	 </planci>
+   </planar>
+   <geodetic>
+    <horizdn/>
+    <ellips>Geodetic Reference System 80</ellips>
+    <semiaxis/>
+    <denflat/>
+   </geodetic>
+  </horizsys>
+ </spref>
+ <eainfo>
+  <detailed>
+   <enttyp>
+    <enttypl>Pixels or cells in band 1 of raster layer</enttypl>
+    <enttypd>108882 pixels (414 X 263) of 4000 m X 4000 m resolution</enttypd>
+    <enttypds/>
+   </enttyp>
+   <attr>
+    <attrlabl>Biological grouping</attrlabl>
+    <attrdef>Categorical prediction for type of groundfish assemblage </attrdef>
+    <attrdefs/>
+    <attrdomv>1 = Inner Newfoundland Shelf; 
+2 = Outer Newfoundland Shelf; 
+3 = Grand Banks;
+4 = Continental Slope;
+5 = Laurentian Channel and Shelf Break </attrdomv>
+   </attr>
+  </detailed>
+ </eainfo>
+ <metainfo>
+  <metd>20190321</metd>
+  <metrd/>
+  <metfrd/>
+  <metc>
+   <cntinfo>
+    <cntorgp>
+     <cntorg>Fisheries and Oceans Canada, Maritimes Region, Coastal and Ecosystem Science Division, Habitat Ecology Section, Marine Conservation Targets Team</cntorg>
+     <cntper>John O'Brien</cntper>
+    </cntorgp>
+    <cntpos/>
+    <cntaddr>
+     <addrtype/>
+     <address/>
+     <city/>
+     <state/>
+     <postal/>
+     <country/>
+    </cntaddr>
+    <cntvoice/>
+    <cntemail>John.O'brien@dfo-mpo.gc.ca</cntemail>
+   </cntinfo>
+  </metc>
+  <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+  <metstdv/>
+ </metainfo>
+</metadata>
