@@ -6,6 +6,8 @@ library(sf)
 library(rnaturalearth)
 library(viridis)
 library(patchwork)
+library(ggspatial)
+library(ggnewscale)
 
 #set working directory
 CanProj <- "+proj=lcc +lat_1=49 +lat_2=77 +lat_0=63.390675 +lon_0=-91.86666666666666 +x_0=6200000 +y_0=3000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
@@ -76,22 +78,100 @@ basemap <- ne_states(country = "Canada",returnclass = "sf")%>%
 
 ##create regional cluster maps
 
-mar_clusters <- clusters%>%
-                filter(bioregion == "MAR")%>%
-                mutate(classification = factor(classification,levels=classification))%>%
-                arrange(classification)
-              
+#common plotting function
+cluster_map <- function(x,basemap=basemap,buf=50){
+  
+  # x is the region flagged out by the 'bioregion' variable
+  # basemap is the rnaturalearth shapefile for a global coastline from the envrionment
+  # buf is a spatial plotting buffer in km
+  
+  temp_clusters <- clusters%>%
+    filter(bioregion == x)%>%
+    mutate(classification = factor(classification,levels=classification))%>%
+    arrange(classification)
+  
+  temp_lims <- temp_clusters%>%
+    st_bbox()%>%
+    st_as_sfc()%>%
+    st_buffer(buf*1000)%>%
+    st_bbox()
+  
+  temp_map <- ggplot()+
+    geom_sf(data=basemap)+
+    geom_sf(data=temp_clusters,aes(fill=classification))+
+    scale_fill_manual(values  = temp_clusters%>%pull(fill_colour))+
+    theme_bw()+
+    coord_sf(xlim=temp_lims[c(1,3)],ylim=temp_lims[c(2,4)])+
+    annotation_scale(location="bl")+
+    theme(legend.title = element_blank())
+  
+  return(temp_map)
+}
 
-mar_lims <- mar_clusters%>%
+#regional Region ----------
+
+
+mar_map <- cluster_map("MAR",basemap)
+sgsl_map <- cluster_map("SGSL",basemap)
+ngsl_map <- cluster_map("NGSL",basemap)
+nl_map <- cluster_map("NL",basemap)
+
+combo_map <- mar_map + 
+             sgsl_map + 
+             ngsl_map + 
+             nl_map + 
+             plot_layout(ncol=2,nrow=2) & 
+             theme(legend.position = "none",axis.text = element_blank())
+
+ggsave("output/combo_map.jpg",combo_map,height=8,width=8,units="in",dpi=300)
+
+
+all_lims <- clusters%>%
             st_bbox()%>%
             st_as_sfc()%>%
-            st_buffer(50*1000)%>%
+            st_buffer(30*1000)%>%
             st_bbox()
 
-mar_map <- ggplot()+
-          geom_sf(data=basemap)+
-          geom_sf(data=mar_clusters,aes(fill=classification))+
-          scale_fill_manual(values  = mar_clusters%>%pull(fill_colour))+
-          theme_bw()+
-          coord_sf(xlim=mar_lims[c(1,3)],ylim=mar_lims[c(2,4)])
-        
+all_clusters <- clusters%>%
+                mutate()
+                group_by(bioregion)%>%
+                mutate( classification = case_when(classification == "Slope" & bioregion == "MAR" ~ "Slope (MAR)", #space to differentiate from NL
+                                                   classification == "Laurentian Channel/Shelf Break" & bioregion == "MAR" ~ "Laurentian Channel/Shelf Break (MAR)",
+                                                   classification == "Slope" & bioregion == "NL" ~ "Slope (NL)", #space to differentiate from MAR
+                                                   classification == "Laurentian Channel/Shelf Break" & bioregion == "NL" ~ "Laurentian Channel/Shelf Break (MAR)",
+                                                   TRUE ~ classification),
+                        classification = factor(classification,levels=classification))%>%
+                arrange(classification)%>%
+                ungroup()
+
+classification_colors <- all_clusters %>%
+                          distinct(classification, fill_colour) %>%  # Get unique combinations of classification and color
+                          deframe() 
+all_map <- ggplot()+
+  geom_sf(data=basemap)+
+  
+  geom_sf(data=all_clusters%>%filter(bioregion=="MAR"),aes(fill=classification))+
+  scale_fill_manual(values = classification_colors)+
+  labs(fill="Scotian Shelf-Bay of Fundy")+
+  new_scale_fill()+
+  
+  geom_sf(data=all_clusters%>%filter(bioregion=="SGSL"),aes(fill=classification))+
+  scale_fill_manual(values = classification_colors)+
+  labs(fill="Southern Gulf")+
+  new_scale_fill()+
+  
+  geom_sf(data=all_clusters%>%filter(bioregion=="NGSL"),aes(fill=classification))+
+  scale_fill_manual(values = classification_colors)+
+  labs(fill="Northern Gulf")+
+  new_scale_fill()+
+  
+  geom_sf(data=all_clusters%>%filter(bioregion=="NL"),aes(fill=classification))+
+  scale_fill_manual(values = classification_colors)+
+  labs(fill="Newfoundland Shelves")+
+ 
+  coord_sf(xlim=all_lims[c(1,3)],ylim=all_lims[c(2,4)])+
+  annotation_scale(location="bl")+
+  annotation_north_arrow(location="tr")+
+  theme_bw()
+
+ggsave("output/allmap.jpg",all_map,height=8*1.5,width=6*1.5,units="in",dpi=300)
