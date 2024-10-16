@@ -133,12 +133,11 @@ all_lims <- clusters%>%
             st_bbox()
 
 all_clusters <- clusters%>%
-                mutate()
                 group_by(bioregion)%>%
                 mutate( classification = case_when(classification == "Slope" & bioregion == "MAR" ~ "Slope (MAR)", #space to differentiate from NL
                                                    classification == "Laurentian Channel/Shelf Break" & bioregion == "MAR" ~ "Laurentian Channel/Shelf Break (MAR)",
                                                    classification == "Slope" & bioregion == "NL" ~ "Slope (NL)", #space to differentiate from MAR
-                                                   classification == "Laurentian Channel/Shelf Break" & bioregion == "NL" ~ "Laurentian Channel/Shelf Break (MAR)",
+                                                   classification == "Laurentian Channel/Shelf Break" & bioregion == "NL" ~ "Laurentian Channel/Shelf Break (NL)",
                                                    TRUE ~ classification),
                         classification = factor(classification,levels=classification))%>%
                 arrange(classification)%>%
